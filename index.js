@@ -4,7 +4,7 @@ require("dotenv").config();
 const { sequelize } = require("./database/models");
 const PORT = process.env.PORT;
 const user = require("./routes/user");
-
+const book = require("./routes/book");
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -26,3 +26,4 @@ app.listen(PORT, () => {
 });
 connectDb();
 app.use("/api/auth", user);
+app.use("/api/book", book);

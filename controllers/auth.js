@@ -27,7 +27,6 @@ class UserController {
   static async login(req, res) {
     try {
       const user = await User.findOne({ where: { email: req.body.email } });
-      console.log(user);
       if (!user) return res.status(400).json({ message: "Invalid User" });
       const password = await brcypt.compare(req.body.password, user.password);
       if (!password)
@@ -35,7 +34,7 @@ class UserController {
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
       return res
         .status(200)
-        .json({ message: "Login successfully" }, user, token);
+        .json({ message: "Login successfully", user, token });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
