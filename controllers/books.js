@@ -5,7 +5,7 @@ class BookController {
   static async createBook(req, res) {
     try {
       const book = await Book.build({
-        Author: req.body.author,
+        Author: req.user.username,
         Title: req.body.title,
         Genre: req.body.genre,
         Borrower: req.body.borrower,

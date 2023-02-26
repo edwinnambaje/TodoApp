@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express();
 const BookController = require("../controllers/books");
-router.post("/create", BookController.createBook);
+const verifyToken = require("../middleware/verifyToken");
+router.post("/create", verifyToken.verifyToken, BookController.createBook);
 router.get("/all", BookController.getAll);
 router.get("/:id", BookController.getSingle);
 router.put("/update/:id", BookController.updateBook);

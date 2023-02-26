@@ -1,7 +1,7 @@
 const brcypt = require("bcrypt");
 const { User } = require("../database/models");
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
+const Token = require("../helpers/jwt");
 
 class UserController {
   static async createUser(req, res) {
@@ -30,7 +30,7 @@ class UserController {
       const password = await brcypt.compare(req.body.password, user.password);
       if (!password)
         return res.status(400).json({ message: "Invalid Password" });
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+      const token = Token.sign({ id: user.id, username: user.username });
       return res
         .status(200)
         .json({ message: "Login successfully", user, token });
