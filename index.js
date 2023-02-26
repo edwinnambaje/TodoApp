@@ -9,10 +9,6 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-sequelize
-  .sync({ alter: true })
-  .then(() => console.log("sync"))
-  .catch((error) => console.log("error"));
 const connectDb = async () => {
   try {
     await sequelize.authenticate();

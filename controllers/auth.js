@@ -9,8 +9,7 @@ class UserController {
       const salt = await brcypt.genSalt(10);
       const hashedPassword = await brcypt.hash(req.body.password, salt);
       const user = await User.build({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
       });
